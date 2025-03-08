@@ -6,6 +6,4 @@ class Solution:
             t = target - nums[l1]
             for l2 in range(l1+1, n):
                 if t == nums[l2]:
-                    r.append(l1)
-                    r.append(l2)
-                    return r
+                    return [l1, l2]
