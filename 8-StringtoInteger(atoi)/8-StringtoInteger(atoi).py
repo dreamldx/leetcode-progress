@@ -21,8 +21,6 @@ class Solution:
                 else:
                     leading = False
 
-            print(f"index: {i} -> {s[i]}")
-
 
             if s[i].isdigit():
                 result = result * 10 + int(s[i])
