@@ -52,7 +52,6 @@ class Solution:
             n, m = self.leftmost(remain)
             
             r = r + self.get_roman(n, remain)
-            print(r)
 
 
             remain = m
