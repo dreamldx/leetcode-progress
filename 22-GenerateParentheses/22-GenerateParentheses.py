@@ -1,12 +1,4 @@
-# Last updated: 4/13/2025, 10:29:41 PM
-class HeapNode:
-    def __init__(self, node):
-        self.node = node
-
-    def __lt__(self, other):
-        # Define comparison based on ListNode's value
-        return self.node.val < other.node.val
-
+# Last updated: 4/13/2025, 10:30:47 PM
 
 # Definition for singly-linked list.
 # class ListNode:
@@ -15,22 +7,15 @@ class HeapNode:
 #         self.next = next
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        dummy = ListNode(0)
-        current = dummy
-        heap = []
+      nodes = []
+      head = point = ListNode(0)
+      for l in lists:
+          while l:
+              nodes.append(l.val)
+              l = l.next
 
-        # Initialize the heap
-        for l in lists:
-            if l:
-                heapq.heappush(heap, HeapNode(l))
+      for x in sorted(nodes):
+          point.next = ListNode(x)
+          point = point.next
 
-        # Extract the minimum node and add its next node to the heap
-        while heap:
-            heap_node = heapq.heappop(heap)
-            node = heap_node.node
-            current.next = node
-            current = current.next
-            if node.next:
-                heapq.heappush(heap, HeapNode(node.next))
-
-        return dummy.next
+      return head.next
