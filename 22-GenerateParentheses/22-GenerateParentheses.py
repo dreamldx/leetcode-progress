@@ -1,15 +1,31 @@
-# Last updated: 4/12/2025, 6:36:04 PM
+# Last updated: 4/13/2025, 10:02:17 PM
 class Solution:
      def generateParenthesis(self, n: int) -> List[str]:
         if n == 0:
             return [""]
-
         answer = []
-        for left_count in range(n):
-            for left_string in self.generateParenthesis(left_count):
-                for right_string in self.generateParenthesis(
-                    n - 1 - left_count
-                ):
-                    answer.append("(" + left_string + ")" + right_string)
+        def backtracking(input: List[str], l, r) -> List[str]:
+          if len(input) == 2*n:
+            answer.append("".join(input))
+
+          if l < n:
+            input.append("(")
+            backtracking(input, l + 1, r)
+            input.pop()
+
+          if r < l:
+            input.append(")")
+            backtracking(input, l, r + 1)
+            input.pop()
+
+
+        backtracking([], 0, 0)
+        
 
         return answer
+
+
+
+
+
+        
