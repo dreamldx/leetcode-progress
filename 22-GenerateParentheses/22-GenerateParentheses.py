@@ -1,31 +1,36 @@
-# Last updated: 4/13/2025, 10:02:17 PM
+# Last updated: 4/13/2025, 10:29:41 PM
+class HeapNode:
+    def __init__(self, node):
+        self.node = node
+
+    def __lt__(self, other):
+        # Define comparison based on ListNode's value
+        return self.node.val < other.node.val
+
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution:
-     def generateParenthesis(self, n: int) -> List[str]:
-        if n == 0:
-            return [""]
-        answer = []
-        def backtracking(input: List[str], l, r) -> List[str]:
-          if len(input) == 2*n:
-            answer.append("".join(input))
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        current = dummy
+        heap = []
 
-          if l < n:
-            input.append("(")
-            backtracking(input, l + 1, r)
-            input.pop()
+        # Initialize the heap
+        for l in lists:
+            if l:
+                heapq.heappush(heap, HeapNode(l))
 
-          if r < l:
-            input.append(")")
-            backtracking(input, l, r + 1)
-            input.pop()
+        # Extract the minimum node and add its next node to the heap
+        while heap:
+            heap_node = heapq.heappop(heap)
+            node = heap_node.node
+            current.next = node
+            current = current.next
+            if node.next:
+                heapq.heappush(heap, HeapNode(node.next))
 
-
-        backtracking([], 0, 0)
-        
-
-        return answer
-
-
-
-
-
-        
+        return dummy.next
