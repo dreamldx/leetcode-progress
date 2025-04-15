@@ -1,21 +1,23 @@
-# Last updated: 4/13/2025, 10:30:47 PM
-
+# Last updated: 4/14/2025, 9:41:26 PM
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
 class Solution:
-    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-      nodes = []
-      head = point = ListNode(0)
-      for l in lists:
-          while l:
-              nodes.append(l.val)
-              l = l.next
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None:
+          return head
 
-      for x in sorted(nodes):
-          point.next = ListNode(x)
-          point = point.next
+        p = head
+        while p is not None:
+          q = p.next 
+          if q is None:
+            break
+          t = p.val
+          p.val = q.val
+          q.val = t
+          p = q.next
 
-      return head.next
+        return head
+        
