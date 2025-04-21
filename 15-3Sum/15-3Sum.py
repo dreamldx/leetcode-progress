@@ -1,4 +1,4 @@
-# Last updated: 4/20/2025, 10:33:54 PM
+# Last updated: 4/20/2025, 10:34:24 PM
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         l=0
@@ -28,7 +28,6 @@ class Solution:
 
         while l<=h:
             mid=(l+h)//2
-            print(mid)
             if nums[mid]==target:
                 return mid
                 break
