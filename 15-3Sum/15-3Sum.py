@@ -1,4 +1,4 @@
-# Last updated: 4/20/2025, 10:33:29 PM
+# Last updated: 4/20/2025, 10:33:54 PM
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         l=0
@@ -15,7 +15,7 @@ class Solution:
                 h=mid-1
             else:
                 l=mid+1
-        print(pivot)
+
         if target<nums[0]:
             l=pivot+1
             h=len(nums)-1
