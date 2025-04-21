@@ -1,23 +1,39 @@
-# Last updated: 4/20/2025, 10:31:02 PM
+# Last updated: 4/20/2025, 10:33:29 PM
 class Solution:
-    def divide(self, dividend: int, divisor: int) -> int:
-        if dividend == -2**31 and divisor == -1:
-            return 2**31 - 1
-        if dividend == -2**31 and divisor == 1:
-            return -2**31
+    def search(self, nums: List[int], target: int) -> int:
+        l=0
+        h=len(nums)-1
+        if len(nums)==1:
+            return 0 if target == nums[0] else -1
+        pivot=-1
+        while l<=h:
+            mid=(l+h)//2
+            if mid+1<len(nums) and nums[mid]>nums[mid+1]:
+                pivot=mid
+                break
+            if nums[mid]<nums[0]:
+                h=mid-1
+            else:
+                l=mid+1
+        print(pivot)
+        if target<nums[0]:
+            l=pivot+1
+            h=len(nums)-1
+        else:
+            l=0
+            h=pivot
+        if pivot==-1:
+            l=0
+            h=len(nums)-1
 
-        negative = (dividend < 0) ^ (divisor < 0)
-
-        absDividend, absDivisor = abs(dividend), abs(divisor)
-
-        quotient = 0
-
-        while absDividend >= absDivisor:
-            tempDivisor, multiple = absDivisor, 1
-            while absDividend >= (tempDivisor << 1):
-                tempDivisor <<= 1
-                multiple <<= 1
-            absDividend -= tempDivisor
-            quotient += multiple
-
-        return -quotient if negative else quotient
+        while l<=h:
+            mid=(l+h)//2
+            print(mid)
+            if nums[mid]==target:
+                return mid
+                break
+            if nums[mid]<target:
+                l=mid+1
+            else:
+                h=mid-1
+        return -1
