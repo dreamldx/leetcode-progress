@@ -1,32 +1,23 @@
-# Last updated: 4/2/2025, 5:56:34 PM
-from collections import defaultdict
-
+# Last updated: 4/20/2025, 10:31:02 PM
 class Solution:
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
-        negative = defaultdict(int)
-        positive = defaultdict(int)
-        zeros = 0
-        for num in nums:
-            if num < 0:
-                negative[num] += 1
-            elif num > 0:
-                positive[num] += 1
-            else:
-                zeros += 1
-        
-        result = []
-        if zeros:
-            for n in negative:
-                if -n in positive:
-                    result.append((0, n, -n))       
-            if zeros > 2:
-                result.append((0,0,0))
+    def divide(self, dividend: int, divisor: int) -> int:
+        if dividend == -2**31 and divisor == -1:
+            return 2**31 - 1
+        if dividend == -2**31 and divisor == 1:
+            return -2**31
 
-        for set1, set2 in ((negative, positive), (positive, negative)):
-            set1Items = list(set1.items())
-            for i, (j, k) in enumerate(set1Items):
-                for j2, k2 in set1Items[i:]:
-                    if j != j2 or (j == j2 and k > 1):
-                        if -j-j2 in set2:
-                            result.append((j, j2, -j-j2))
-        return result
+        negative = (dividend < 0) ^ (divisor < 0)
+
+        absDividend, absDivisor = abs(dividend), abs(divisor)
+
+        quotient = 0
+
+        while absDividend >= absDivisor:
+            tempDivisor, multiple = absDivisor, 1
+            while absDividend >= (tempDivisor << 1):
+                tempDivisor <<= 1
+                multiple <<= 1
+            absDividend -= tempDivisor
+            quotient += multiple
+
+        return -quotient if negative else quotient
