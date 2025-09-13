@@ -1,29 +1,24 @@
-# Last updated: 9/13/2025, 12:28:02 PM
+# Last updated: 9/13/2025, 12:38:00 PM
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        zero = {}
-        total = 1
+        r = [1] * len(nums)
         n = len(nums)
-        r = []
-        for i in range(0, n):
-            if nums[i] == 0:
-                zero[i] = 1
-                continue
-            total = total * nums[i]
 
-        more_zero = len(zero) > 1
-        has_zero = len(zero) > 0
-        for i in range(0, n):
-            if has_zero and (i in zero):
-                if more_zero:
-                    r.append(0)
-                else:
-                    r.append(total)
+        l = 1
+        for i in range(1, n):
+          l = l * nums[i-1]
+          r[i] = l
 
-            if has_zero and (i not in zero):
-                r.append(0)
-            
-            if not has_zero:
-                r.append(int(total / nums[i]))
+        print(r)
 
+        l = 1
+        for i in range(n-2, -1, -1):
+          print(i)
+          l = l * nums[i+1]
+          r[i] = r[i] * l
+
+        print(r)
         return r
+
+
+
