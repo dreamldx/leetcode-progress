@@ -1,21 +1,20 @@
-# Last updated: 9/19/2025, 6:29:27 PM
+# Last updated: 9/20/2025, 5:34:58 PM
 class Solution:
-    def isPalindrome(self, s: str) -> bool:
-        p = 0
-        q = len(s) - 1
-        while p<=q:
-            if not s[p].isalnum():
-                p += 1
-                continue
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        look_up = {}
+        result = []
+        n = len(numbers)
+        for i in range(0, n):
+            look_up[numbers[i]] = i
 
-            if not s[q].isalnum():
-                q -= 1
-                continue
+        print(look_up)
 
-            if s[p].lower() != s[q].lower():
-                return False
+        for i in range(0, n):
+            remain = target - numbers[i]
+            print(remain)
+            if remain in look_up:
+                result.append(i+1)
+                result.append(look_up[remain]+1)
+                return result
 
-            p += 1
-            q -= 1
-
-        return True
+        return None
