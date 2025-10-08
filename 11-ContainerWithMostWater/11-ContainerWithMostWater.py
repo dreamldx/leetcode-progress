@@ -1,4 +1,4 @@
-# Last updated: 10/8/2025, 12:16:29 PM
+# Last updated: 10/8/2025, 12:16:49 PM
 class Solution:
     def maxArea(self, height: List[int]) -> int:
         n = len(height)
@@ -11,9 +11,6 @@ class Solution:
           w = q - p
           h = min(height[p], height[q])
           area = w * h
-
-          print(f"{p}-{q} = {area}")
-
           if area > m:
             m_p = p
             m_q = q
